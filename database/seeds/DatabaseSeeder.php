@@ -103,7 +103,7 @@ class DatabaseSeeder extends Seeder
             Setting::insert($settings);
         }
 
-        if (User::count() == 01) {
+        if (User::count() == 0) {
             User::truncate();
 
             factory(User::class)->create([
