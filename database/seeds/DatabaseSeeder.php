@@ -1,5 +1,6 @@
 <?php
 
+use App\Category;
 use App\Setting;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,6 @@ class DatabaseSeeder extends Seeder
 
         Model::unguard();
 
-        Setting::truncate();
         
         $settings = [
             [
@@ -96,14 +96,88 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        Setting::insert($settings);
+        if (Setting::count() == 0) {
 
-        User::truncate();
+            Setting::truncate();
 
-        factory(User::class)->create([
-            'password' => bcrypt('232323'),
-            'email' => 'tieumaster@yahoo.com'
-        ]);
+            Setting::insert($settings);
+        }
+
+        if (User::count() == 01) {
+            User::truncate();
+
+            factory(User::class)->create([
+                'password' => bcrypt('232323'),
+                'email' => 'tieumaster@yahoo.com'
+            ]);
+        }
+
+        if (Category::count() == 0) {
+
+           $biquyet = Category::create([
+                'name' => 'Bí quyết làm đẹp',
+                'seo_name' => 'Bí quyết làm đẹp',
+                'keywords' => 'Bí quyết làm đẹp',
+                'desc' => 'Bí quyết làm đẹp',
+                'parent_id' => null,
+                'index_display' => 1,
+            ]);
+
+            Category::create([
+                'name' => 'Thực đơn giảm cân',
+                'seo_name' => 'Thực đơn giảm cân',
+                'keywords' => 'Thực đơn giảm cân',
+                'desc' => 'Thực đơn giảm cân',
+                'parent_id' => $biquyet->id,
+                'index_display' => 1,
+            ]);
+
+            Category::create([
+                'name' => 'Tập luyện giảm cân',
+                'seo_name' => 'Tập luyện giảm cân',
+                'keywords' => 'Tập luyện giảm cân',
+                'desc' => 'Tập luyện giảm cân',
+                'parent_id' => $biquyet->id,
+                'index_display' => 1,
+            ]);
+
+            Category::create([
+                'name' => 'Tư vấn giảm cân',
+                'seo_name' => 'Tư vấn giảm cân',
+                'keywords' => 'Tư vấn giảm cân',
+                'desc' => 'Tư vấn giảm cân',
+                'parent_id' => $biquyet->id,
+                'index_display' => 1,
+            ]);
+
+            Category::create([
+                'name' => 'Câu chuyện thành công',
+                'seo_name' => 'Câu chuyện thành công',
+                'keywords' => 'Câu chuyện thành công',
+                'desc' => 'Câu chuyện thành công',
+                'parent_id' => null,
+                'index_display' => 2,
+            ]);
+
+            Category::create([
+                'name' => 'Chia sẻ',
+                'seo_name' => 'Chia sẻ',
+                'keywords' => 'Chia sẻ',
+                'desc' => 'Chia sẻ',
+                'parent_id' => null,
+                'index_display' => 0,
+            ]);
+
+            Category::create([
+                'name' => 'Sự kiện',
+                'seo_name' => 'Sự kiện',
+                'keywords' => 'Sự kiện',
+                'desc' => 'Sự kiện',
+                'parent_id' => null,
+                'index_display' => 0,
+            ]);
+
+        }
 
         Model::reguard();
 

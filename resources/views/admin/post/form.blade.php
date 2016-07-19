@@ -31,6 +31,11 @@
                     {!! Form::text('seo_title', null, ['class' => 'form-control']) !!}
                 </div>
 
+                <div class="form-group">
+                    {!! Form::label('author', 'Author') !!}
+                    {!! Form::text('author', null, ['class' => 'form-control']) !!}
+                </div>
+
             <div class="form-group">
                 {!! Form::label('category_id', 'Category') !!}
                 {!! Form::select('category_id', $categories, null, ['class' => 'form-control']) !!}

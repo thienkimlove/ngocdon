@@ -1,76 +1,75 @@
 <header class="header">
-    <div class="header-mid">
-        <div class="fix">
-            <h1>
-                <a href="" title="" class="banner">
-                    <img src="{{url('frontend/images/banner.png')}}" alt="">
-                </a>
-            </h1>
-            <div class="box-find" id="box-find">
-                {!! Form::open(array('url' => 'search', 'method' => 'get')) !!}
-                    <input type="text" placeholder="Từ khóa tìm kiếm" name="q" class="txt"/>
-                    <input type="submit" value="" name="submit" class="btn-find"/>
-                {!! Form::close() !!}
-            </div>
-            <ul class="nav-social">
-                <li><a href=""><img src="{{url('frontend/images/i_fb.png')}}" alt=""></a></li>
-                <li><a href=""><img src="{{url('frontend/images/i_ytube.png')}}" alt=""></a></li>
+    <div class="container">
+        <div class="panelTop">
+            {!! Form::open(array('url' => 'search', 'method' => 'get')) !!}
+                <div class="boxSearch">
+                    <input type="text" name="q" placeholder="Nội dung tìm kiếm">
+                </div>
+            {!! Form::close() !!}
+
+            <ul class="navSocial pc">
+                <li>
+                    <a href="#" class="fb">Facebook</a>
+                </li>
+                <li><a href="#" class="yu">Youtube</a></li>
             </ul>
         </div>
+        <a href="#" title="Menu" class="sp btnMenu" id="btnMenu">Menu</a>
     </div>
-    <nav class="bg-nav">
-        <div class="fix">
-            <ul class="nav-main">
-                <li>
-                    <a class="{{(isset($page) && $page == 'index') ? 'active' : ''}}" href="{{url('/')}}" title="">TRANG CHỦ</a>
-                </li>
+    <div class="headerNav">
+        <div class="navGlobal">
+            <div class="container">
+                <ul id="navGlobal" class="navGlobal pc clearFix">
+                    <li><a href="{{url('/')}}" class="{{($page == 'index') ? 'current' : ''}}">Trang chủ</a></li>
 
-                <li>
-                    <a class="{{(isset($page) && $page == 'product') ? 'active' : ''}}" href="{{url('product')}}" title="">Sản phẩm</a>
-                </li>
-
-                @if ($headerCategories->count() > 0)
-                    @foreach ($headerCategories as $headerCategory)
+                    @foreach ($headerCategories as $k => $headerCategory)
                         <li>
                             <a class="{{(isset($page) && ($page == $headerCategory->slug || in_array($page, $headerCategory->subCategories->lists('slug')->all()))) ? 'active' : ''}}" href="{{url($headerCategory->slug)}}">{{$headerCategory->name}}</a>
                             @if ($headerCategory->subCategories->count() > 0)
-                                <ul>
+                                <ul class="hasSub">
                                     @foreach ($headerCategory->subCategories as $childCategory)
-                                        <li><a class="{{(isset($page) && $page == $childCategory->slug) ? 'active' : ''}}" href="{{url($childCategory->slug)}}">{{$childCategory->name}}</a></li>
+                                        <li><a class="{{(isset($page) && $page == $childCategory->slug) ? 'current' : ''}}" href="{{url($childCategory->slug)}}">{{$childCategory->name}}</a></li>
                                     @endforeach
                                 </ul>
                             @endif
                         </li>
+                        @if ($k == 0)
+                            <li>
+                                <a class="{{(isset($page) && $page == 'product') ? 'current' : ''}}" href="{{url('product')}}" title="">Sản phẩm</a>
+                            </li>
+                        @endif
                     @endforeach
-                @endif
 
-
-                <li>
-                    <a class="{{(isset($page) && $page == 'cau-hoi-thuong-gap') ? 'active' : ''}}" href="{{url('cau-hoi-thuong-gap')}}" title="">Hỏi đáp chuyên gia</a>
-                </li>
-                <li>
-                    <a class="{{(isset($page) && $page == 'video') ? 'active' : ''}}" href="{{url('video')}}" title="">Video</a>
-                </li>
-                <li>
-                    <a class="{{(isset($page) && $page == 'lien-he') ? 'active' : ''}}" href="{{url('lien-he')}}" title="">Liên hệ</a>
-                </li>
-                <li>
-                    <a class="{{(isset($page) && $page == 'phan-phoi') ? 'active' : ''}}" href="{{url('phan-phoi')}}" title="">Phân phối</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-@if (isset($page) && $page == 'index')
-<div class="box-slider">
-    <div class="owl-carousel" id="slide-homepage">
-        @foreach ($headerIndexBanners as $banner)
-            <div class="item">
-                <a class="thumb" href="{{$banner->url}}" title="">
-                    <img src="{{url('files/'.$banner->image)}}"/>
-                </a>
+                    <li>
+                        <a class="{{(isset($page) && $page == 'video') ? 'current' : ''}}" href="{{url('video')}}" title="">Video</a>
+                    </li>
+                    <li>
+                        <a class="{{(isset($page) && $page == 'phan-phoi') ? 'current' : ''}}" href="{{url('phan-phoi')}}" title="">Điểm bán</a>
+                    </li>
+                    <li>
+                        <a class="{{(isset($page) && $page == 'lien-he') ? 'current' : ''}}" href="{{url('lien-he')}}" title="">Liên hệ</a>
+                    </li>
+                </ul>
+                <h1>
+                    <a href="{{url('/')}}" class="logo" title="logo">
+                        <img src="{{url('frontend/imgs/logo.png')}}" alt="Logo" width="211" height="67">
+                    </a>
+                </h1>
             </div>
-        @endforeach
+        </div>
     </div>
-</div><!--//box-slider-->
-@endif
+</header>
+
+<section class="boxBanner">
+    <div class="boxSlider">
+        <div class="owl-carousel" id="slideHomepage">
+            @foreach ($headerIndexBanners as $banner)
+                <div class="item">
+                    <a class="thumb" href="{{$banner->url}}" title="">
+                        <img src="{{url('files/'.$banner->image)}}"/>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>

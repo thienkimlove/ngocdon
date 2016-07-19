@@ -1,267 +1,135 @@
 (function($){
-    var statusSearch = 0;
-    var timeSearch = null;
-    var delaySearch = 5000;
-
-    var setMenuMobile = function(){
-        $("#btn-menu").on("click",function(){
-            if($("body").hasClass("show-menu")){
-                closeMenuMobile();
-            }else{
-                $("body").addClass("show-menu");
-                var height_device = $(window).height();
-//                var width_device = $(window).width();
-                var padding_menu = 30;
-               /* if(width_device < 640){
-                    padding_menu = 45;
-                }*/
-                var height_menu = $("#menu-left .inner").height() + padding_menu;
-                /*if(height_menu <= height_device){
-                    height_menu = height_device;
-                }*/
-                $("#wrapper").css({height: height_menu});
-                $("#overlay").css({display: "block"});
-            }
-        });
-    };
-
-    var resetMenuMobile = function(){
-        $("#overlay").on("click",function(){
-            closeMenuMobile();
-        });
-    };
-    var closeMenuMobile = function(){
-        $("body").removeClass("show-menu");
-        $("#wrapper").removeAttr("style");
-        $("#overlay").css({display: "none"});
-    };
-
-    var checkSearch = function(){
-        if(statusSearch == 0){
-            window.clearTimeout(timeSearch);
-            timeSearch = window.setTimeout(function(){
-                $("#box-find").stop().animate({width: 210});
-            },0);
-        }else{
-            window.clearTimeout(timeSearch);
-            timeSearch = window.setTimeout(function(){
-                $("#box-find").stop().animate({width: 23});
-            },delaySearch);
+  /*mobile*/
+  var nav_global = $('#navGlobal');
+  var showMenuMobile = function () {
+    $('#btnMenu').click(function(e){
+      var w_device = $(window).width();
+      if(e.handled !== true){
+        if(w_device < 959 && $('#btnMenu').is(':visible')){
+          if(nav_global.is(':visible')){
+            nav_global.slideUp(500);
+          }else{
+            nav_global.delay(100).slideDown(500);
+          }
         }
-    };
-
-    var changeSearch = function(){
-        $("#box-find").hover(function(){
-            checkSearch();
-            statusSearch = 1;
-        },function(){
-            checkSearch();
-            statusSearch = 0;
-        });
-    };
-
-    var slideHomepage = function(){
-        $('#slide-homepage').owlCarousel({
-            loop:true,
-            margin:0,
-            responsiveClass:true,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            responsive:{
-                0:{
-                    items:1,
-                    nav:true,
-                    dots: false
-                },
-                640:{
-                    items:1,
-                    nav:true,
-                    dots: false
-                },
-                1000:{
-                    items:1,
-                    nav:true,
-                    loop:true,
-                    dots: true
-                }
-            }
-        });
-    };
-
-    var slideCompany = function(){
-        $('#slide-company').owlCarousel({
-            loop:true,
-            margin:20,
-            responsiveClass:true,
-            responsive:{
-                0:{
-                    items:1,
-                    nav:true,
-                    dots: false
-                },
-                640:{
-                    items:2,
-                    nav:true,
-                    dots: false
-                },
-                1000:{
-                    items:4,
-                    nav:true,
-                    loop:true,
-                    dots: false
-                }
-            }
-        });
-    };
-
-    var slideLink = function(){
-        $('#slide-link').owlCarousel({
-            loop:true,
-            margin:20,
-            responsiveClass:true,
-            responsive:{
-                0:{
-                    items:2,
-                    nav:false,
-                    dots: false
-                },
-                640:{
-                    items:4,
-                    nav:false,
-                    dots: false
-                },
-                1000:{
-                    items:6,
-                    nav:false,
-                    loop:true,
-                    dots: false
-                }
-            }
-        });
-    };
-
-    var slideProduct = function(){
-        $('#slide-product').owlCarousel({
-            loop:true,
-            margin:20,
-            responsiveClass:true,
-            responsive:{
-                0:{
-                    items:1,
-                    nav:true,
-                    dots: false
-                },
-                640:{
-                    items:2,
-                    nav:true,
-                    dots: false
-                },
-                1000:{
-                    items:3,
-                    nav:true,
-                    loop:true,
-                    dots: false
-                }
-            }
-        });
-    };
-
-
-    var slidePartner = function(){
-        $('#slide-partner').owlCarousel({
-            loop:true,
-            margin:20,
-            responsiveClass:true,
-            responsive:{
-                0:{
-                    items:1,
-                    nav:false,
-                    dots: false
-                },
-                640:{
-                    items:2,
-                    nav:false,
-                    dots: false
-                },
-                1000:{
-                    items:4,
-                    nav:false,
-                    loop:false,
-                    dots: false
-                }
-            }
-        });
-    };
-
-    var slideProject = function(){
-        $('#slide-project').owlCarousel({
-            loop:true,
-            margin:30,
-            responsiveClass:true,
-            responsive:{
-                0:{
-                    items:1,
-                    nav:false
-                },
-                640:{
-                    items:2,
-                    nav:false
-                },
-                1000:{
-                    items:3,
-                    nav:false,
-                    loop:true
-                }
-            }
-        });
-    };
-
-    var equalHeight = function(selector) {
-        minheight = 0;
-        $(selector).each(function() {
-            thisheight = $(this).height();
-            if (thisheight > minheight) {
-                minheight = thisheight
-            }
-        });
-        minheight = minheight + 2;
-        $(selector).css("min-height", minheight)
-    };
-
-    var tabContent = function(){
-        $("a[data-type='tab']").on('click',function(e){
-            e.preventDefault();
-            var parent = $(this).data('parent');
-            var content = $(this).data('content');
-            var reset = $(this).data('reset');
-            $("." + parent + " li").removeClass('active');
-            $(this).parent("li").addClass('active');
-            $("."+reset).css({display:"none"});
-            $("#"+content).css({display:"block"});
-        });
-    };
-    //Accordion
-     $(function() {
-        $("#accordion .accordion").hide();
-        $("#accordion a").click(function() {
-          $('#accordion .accordion').slideUp(500);
-          $('#accordion .accordion').addClass('open');
-          $(this).next().slideDown(300);
-        });
-      });
-  //endAccordion
-    jQuery(document).ready(function() {
-        changeSearch();
-        slideCompany();
-        slideHomepage();
-        slideProduct();
-        slideProject();
-        slideLink();
-        slidePartner();
-        tabContent();
-        equalHeight(".box-member .data .item");
-        setMenuMobile();
-        resetMenuMobile();
+        $(this).toggleClass('show');
+        e.handled = true;
+      }
+      e.preventDefault();
     });
-})(jQuery);
+  };
+  /*tabContent*/
+  var $tabs = $('#horizontalTab');
+  $tabs.responsiveTabs({
+      rotate: false,
+      startCollapsed: 'accordion',
+      collapsible: 'accordion',
+      setHash: true,
+      activate: function(e, tab) {
+          $('.info').html('Tab <strong>' + tab.id + '</strong> activated!');
+      },
+      activateState: function(e, state) {
+          //console.log(state);
+          $('.info').html('Switched from <strong>' + state.oldState + '</strong> state to <strong>' + state.newState + '</strong> state!');
+      }
+  });
+  /*end*/
+  /*fixedHeader*/
+  // scroll is still position
+    $(function(){ 
+    // scroll is still position
+      var scroll = $(document).scrollTop();
+      var headerHeight = $('.header').outerHeight();
+      //console.log(headerHeight);
+      
+      $(window).scroll(function() {
+        // scrolled is new position just obtained
+        var scrolled = $(document).scrollTop();
+                
+        // optionally emulate non-fixed positioning behaviour
+      
+        if (scrolled > headerHeight){
+          $('.header').addClass('offCanvas');
+        } else {
+          $('.header').removeClass('offCanvas');
+        }
 
+          if (scrolled > scroll){
+               // scrolling down
+           $('.header').removeClass('hFixed');
+            } else {
+            //scrolling up
+            $('.header').addClass('hFixed');
+          }       
+        scroll = $(document).scrollTop(); 
+       });
+    });
+  /*end*/
+  var slideHomepage = function(){
+    $('#slideHomepage').owlCarousel({
+        loop:true,
+        margin:0,
+        responsiveClass:true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        responsive:{
+            0:{
+                items:1,
+                nav:true,
+                dots: false
+            },
+            640:{
+                items:1,
+                nav:true,
+                dots: false
+            },
+            1000:{
+                items:1,
+                nav:true,
+                loop:true,
+                dots: false
+            }
+        }
+    });
+  };
+  var slideHistory = function(){
+      $('#slideHistory').owlCarousel({
+        loop:true,
+        margin:20,
+        responsiveClass:true,
+        responsive:{
+          0:{
+            items:1,
+            nav:true,
+            dots: false
+          },
+          640:{
+            items:2,
+            nav:true,
+            dots: false
+          },
+          1000:{
+            items:2,
+            nav:false,
+            loop:true,
+            dots: true
+        }
+      }
+    });
+  };
+  /*equalHeight*/
+   equalHeight($('.boxContact .itemLeft, .boxContact .itemRight'));
+    function equalHeight(obj) {
+      if($(window).width() > 960 && obj.length>0){
+          obj.matchHeight();
+          $.fn.matchHeight._update();
+      } else {
+        obj.removeAttr('style');
+      }
+    }
+  jQuery(document).ready(function() {
+    showMenuMobile();
+    slideHomepage();
+    slideHistory();
+  });
+})(jQuery);

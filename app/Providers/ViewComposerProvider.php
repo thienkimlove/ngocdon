@@ -34,10 +34,9 @@ class ViewComposerProvider extends ServiceProvider
         view()->composer('frontend.header', function ($view) {     
             
             $headerIndexBanners = Banner::where('status', true)->where('position', 'header_index')->get();
-            $headerNotIndexBanners = Banner::where('status', true)->where('position', 'header_no_index')->get();
             
-            $view->with('headerCategories',  Category::whereNull('parent_id')->get());
-            $view->with('headerNotIndexBanners',  $headerNotIndexBanners);           
+            $view->with('headerCategories',  Category::whereNull('parent_id')->where('slug', '!=', 'cau-chuyen-thanh-cong')->get());
+
             $view->with('headerIndexBanners',  $headerIndexBanners);           
         });
 
@@ -54,7 +53,7 @@ class ViewComposerProvider extends ServiceProvider
 
         view()->composer('frontend.right_index', function ($view) {            
             
-            $view->with('featureVideos',  Video::latest('updated_at')->limit(2)->get());           
+            $view->with('featureVideos',  Video::latest('updated_at')->limit(3)->get());
         });
 
         view()->composer('frontend.right', function ($view) {

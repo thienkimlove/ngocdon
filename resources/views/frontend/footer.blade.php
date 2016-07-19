@@ -15,16 +15,9 @@
                     @foreach ($footerCategories as $category)
                         <li><a href="{{url($category->slug)}}">{{$category->name}}</a></li>
                     @endforeach
-                    <li><a href="{{url('cau-hoi-thuong-gap')}}">CÂU HỎI THƯỜNG GẶP</a></li>
                     <li><a href="{{url('lien-he')}}">LIÊN HỆ</a></li>
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="copyRight">
-        <div class="container">
-            <p class="copy">Giúp hoạt huyết, thông kinh<br />
-          © 2016 Thông Huyết Tuệ Linh. Vui lòng ghi rõ nguồn khi sử dụng nội dung từ website này.</p>
-      </div>
     </div>
 </footer>

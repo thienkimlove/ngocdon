@@ -1,74 +1,17 @@
 @extends('frontend')
 
 @section('content')
-
-    <section class="section fix">
-        <div class="layout-home">
-            <ul class="breadcrumbs cf">
-                <li><a href="{{url('/')}}">Trang chủ</a></li>
-                <li>Hỏi đáp chuyên gia</li>
-            </ul>
-            <div class="col-left">
-                <div class="box-faq">
-                    @if ($mainQuestion)
-                        <article class="item">
-                            <div class="content">
-                                <h3 class="title-faq">
-                                   {{$mainQuestion->title}}
-                                </h3>
-                                <span class="human">Người gửi:
-                                  <span>{{$mainQuestion->ask_person}}</span>
-                                </span>
-                                <time class="time" datetime="{{$mainQuestion->updated_at->format('Y/m/d')}}">{{$mainQuestion->updated_at->format('d/m/Y')}}</time>
-                                <p>
-                                    <span class="question">Câu hỏi:</span>
-                                    <span>{{$mainQuestion->question}}</span>
-                                </p>
-                            </div>
-                            <div id="accordion">
-                                <a href="#" class="answer">Xem trả lời</a>
-                                <div class="accordion">
-                                    <div class="content">
-                                        <p>
-                                            {{$mainQuestion->answer}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    @endif
-                    @foreach ($questions as $question)
-                        <article class="item">
-                            <div class="content">
-                                <h3 class="title-faq">{{$question->title}}</h3>
-                                <span class="human">Người gửi:
-                                  <span>{{$question->ask_person}}</span>
-                                </span>
-                                <time class="time" datetime="{{$question->updated_at->format('Y/m/d')}}">{{$question->updated_at->format('d/m/Y')}}</time>
-                                <p>
-                                    <span class="question">Câu hỏi:</span>
-                                    <span>{{$question->question}}</span>
-                                </p>
-                            </div>
-                            <div id="accordion">
-                                <a href="#" class="answer">Xem trả lời</a>
-                                <div class="accordion">
-                                    <div class="content">
-                                        <p>
-                                          {{$question->answer}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    @endforeach
-                    <!-- /paging -->
-                    <div class="boxPaging">
-                        @include('pagination.default', ['paginate' => $questions])
-                    </div><!--//news-list-->
-                </div>
-                <div class="box-contact cf">
-                    <div class="form-question">
+    <section class="layoutHome">
+        <div class="container">
+            <div class="layoutLeft">
+                <ul class="breadCrumb clearFix">
+                    <li>
+                        <a href="{{url('/')}}">Trang chủ</a>
+                    </li>
+                    <li class="active">Hỏi đáp</li>
+                </ul>
+                <div class="boxQuestion">
+                    <div class="boxForm clearFix">
                         {!! Form::open(array('url' => 'save_question')) !!}
                             <input type="text" name="ask_person" class="txt txt-name" placeholder="Họ và tên"/>
                             <input type="email" name="ask_email" class="txt txt-email" placeholder="Email"/>
@@ -79,19 +22,39 @@
                             <input type="reset" value="Làm lại" class="btn btn-reset"/>
                         {!! Form::close() !!}
                     </div>
-                </div>
+                    <!-- //listQuestion -->
+                    <h3 class="globalTitle">
+                        Câu hỏi mới nhất
+                    </h3>
+                    @foreach ($questions as $question)
+                      <article class="item">
+                        <h3 class="title-faq"><span>?</span>{{$question->title}}</h3>
+                        <div class="content">
+                            <p>
+                                <span class="question">Câu hỏi:</span>
+                                <span>{{$question->question}}</span>
+                            </p>
+                            <div class="viewDetail clearFix">
+                                <div class="date">
+                                      <span class="datePost">
+                                        {{$question->updated_at->format('D/m/Y')}}
+                                      </span>
+                                       <span>
+                                         {{$question->updated_at->format('H:i:s')}}
+                                      </span>
+                                </div>
+                                <a href="{{url('cau-hoi-thuong-gap', $question->slug)}}" class="viewMore">Xem thêm</a>
+                            </div>
+                        </div>
+                    </article>
+                    @endforeach
 
-            @foreach ($middleIndexBanner as $banner)
-                <div class="box-banner">
-                    <img src="{{url('files/'.$banner->image)}}" alt="">
+                    <div class="boxPaging">
+                        @include('pagination.default', ['paginate' => $questions])
+                    </div><!--//news-list-->
                 </div>
-            @endforeach
-
-            </div><!--//col-left-->
+            </div>
             @include('frontend.right')
-            <div class="clear"></div>
-        </div><!--//layout-home-->
-        <div class="clear"></div>
+        </div>
     </section>
-
 @endsection

@@ -125,16 +125,26 @@ class FrontendController extends Controller
     {
         $page = 'index';
 
-        $topIndexCategory = Category::where('index_display', 1)->whereNull('parent_id')->get();
-        
-        if ($topIndexCategory->count() > 0) {
-            $topIndexCategory = $topIndexCategory->first();
-        } else {
-            $topIndexCategory = null;
+        $featurePosts  =  Post::publish()
+            ->where('index_slide', true)
+            ->latest('updated_at')
+            ->limit(3)
+            ->get();
+
+        foreach ($featurePosts as $k => $post) {
+            if ($k == 0) {
+                $post->class = ' borderLeft';
+            } else if ($k == 2) {
+                $post->class = ' borderRight';
+            } else {
+                $post->class = '';
+            }
         }
 
+        $topIndexCategory = Category::where('index_display', 1)->get();
 
-        $secondIndexCategory = Category::where('index_display', 2)->whereNull('parent_id')->get();
+
+        $secondIndexCategory = Category::where('index_display', 2)->get();
 
         if ($secondIndexCategory->count() > 0) {
             $secondIndexCategory = $secondIndexCategory->first();
@@ -142,17 +152,8 @@ class FrontendController extends Controller
             $secondIndexCategory = null;
         }
 
-        $thirdIndexCategory = Category::where('index_display', 3)->whereNull('parent_id')->get();
-
-        if ($thirdIndexCategory->count() > 0) {
-            $thirdIndexCategory = $thirdIndexCategory->first();
-        } else {
-            $thirdIndexCategory = null;
-        }
-
-        $middleIndexBanner = Banner::where('status', true)->where('position', 'middle_index')->get();
         
-        return view('frontend.index', compact('topIndexCategory', 'secondIndexCategory', 'thirdIndexCategory', 'middleIndexBanner', 'page'))->with($this->generateMeta());
+        return view('frontend.index', compact('featurePosts', 'topIndexCategory', 'secondIndexCategory', 'page'))->with($this->generateMeta());
     }
 
     public function contact()
@@ -168,8 +169,6 @@ class FrontendController extends Controller
         $meta_title = $meta_desc = $meta_keywords = null;
         $videos = Video::paginate(6);
 
-        $latestVideos = Video::latest('updated_at')->limit(5)->get();
-
         if ($videos->count() > 0) {
             $mainVideo = $videos->first();
         }
@@ -183,7 +182,7 @@ class FrontendController extends Controller
         }
 
 
-        return view('frontend.video', compact('videos', 'mainVideo', 'latestVideos', 'page'))->with($this->generateMeta('video', [
+        return view('frontend.video', compact('videos', 'mainVideo', 'page'))->with($this->generateMeta('video', [
             'title' => $meta_title,
             'desc' => $meta_desc,
             'keywords' => $meta_keywords,
@@ -193,6 +192,7 @@ class FrontendController extends Controller
 
     public function delivery($value = null)
     {
+        $middleIndexBanner = Banner::where('status', true)->where('position', 'middle_index')->get();
         $page = 'phan-phoi';
         $meta_title = $meta_desc = $meta_keywords = null;
         if ($value) {
@@ -201,7 +201,7 @@ class FrontendController extends Controller
             $meta_desc = $delivery->desc;
             $meta_keywords = $delivery->keywords;
 
-            return view('frontend.detail_delivery', compact('delivery', 'page'))->with($this->generateMeta('phan-phoi', [
+            return view('frontend.detail_delivery', compact('delivery', 'page', 'middleIndexBanner'))->with($this->generateMeta('phan-phoi', [
                 'title' => $meta_title,
                 'desc' => $meta_desc,
                 'keywords' => $meta_keywords,
@@ -233,6 +233,7 @@ class FrontendController extends Controller
 
     public function tag($value)
     {
+        $page = 'tag';
         $middleIndexBanner = Banner::where('status', true)->where('position', 'middle_index')->get();
 
         $tag = Tag::where('slug', $value)->get();
@@ -252,7 +253,7 @@ class FrontendController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->paginate(10);
 
-            return view('frontend.tag', compact('posts', 'tag', 'middleIndexBanner'))->with($this->generateMeta([
+            return view('frontend.tag', compact('posts', 'tag', 'page', 'middleIndexBanner'))->with($this->generateMeta([
                 'title' => $meta_title,
                 'desc' => $meta_desc,
                 'keywords' => $meta_keywords,
@@ -262,12 +263,13 @@ class FrontendController extends Controller
     
     public function search(Request $request) 
     {
+        $page = 'search';
         if ($request->input('q')) {
             $middleIndexBanner = Banner::where('status', true)->where('position', 'middle_index')->get();
             $keyword = $request->input('q');
             $posts = Post::publish()->where('title', 'LIKE', '%' . $keyword . '%')->paginate(10);
 
-            return view('frontend.search', compact('posts', 'keyword', 'middleIndexBanner'))->with($this->generateMeta('tag', [
+            return view('frontend.search', compact('posts', 'keyword', 'page', 'middleIndexBanner'))->with($this->generateMeta('tag', [
                 'title' => 'Tìm kiếm cho từ khóa ' . $keyword,
                 'desc' => 'Tìm kiếm cho từ khóa ' . $keyword,
                 'keywords' => $keyword,
@@ -296,7 +298,6 @@ class FrontendController extends Controller
 
     public function question($value = null)
     {
-        $middleIndexBanner = Banner::where('status', true)->where('position', 'middle_index')->get();
         $page = 'cau-hoi-thuong-gap';
         $mainQuestion = null;
         $meta_title = $meta_desc = $meta_keywords = null;
@@ -305,13 +306,20 @@ class FrontendController extends Controller
             $meta_title = ($mainQuestion->seo_title) ? $mainQuestion->seo_title : $mainQuestion->title;
             $meta_desc = $mainQuestion->desc;
             $meta_keywords = $mainQuestion->keywords;
+
+            return view('frontend.question_detail', compact('question', 'page'))->with($this->generateMeta('cau-hoi-thuong-gap', [
+                'title' => $meta_title,
+                'desc' => $meta_desc,
+                'keywords' => $meta_keywords,
+            ], $mainQuestion));
+        } else {
+            $questions = Question::publish()->paginate(10);
+            return view('frontend.question', compact('questions', 'page'))->with($this->generateMeta('cau-hoi-thuong-gap', [
+                'title' => $meta_title,
+                'desc' => $meta_desc,
+                'keywords' => $meta_keywords,
+            ], $mainQuestion));
         }
-        $questions = Question::publish()->paginate(10);
-        return view('frontend.question', compact('questions', 'mainQuestion', 'middleIndexBanner', 'page'))->with($this->generateMeta('cau-hoi-thuong-gap', [
-            'title' => $meta_title,
-            'desc' => $meta_desc,
-            'keywords' => $meta_keywords,
-        ], $mainQuestion));
     }
 
     public function main($value)

@@ -1,44 +1,61 @@
-<div class="col-right">
-    @if ($featureVideos->count() > 0)
-        <div class="box-video">
-            <h3 class="global-title"><a href="{{url('video')}}">Góc videos</a></h3>
-            @if ($firstVideo = $featureVideos->shift())
-                <div class="data">
-                    <iframe width="100%" height="315" src="{{$firstVideo->url}}" frameborder="0" allowfullscreen></iframe>
-                </div>
-            @endif
-            @if ($featureVideos->count() > 0)
-                <ul class="listVideo">
+<div class="layoutRight">
+    <div class="boxAdv">
+        <a href="#">
+            <img src="{{url('frontend/imgs/temp/contact.jpg')}}" alt="">
+        </a>
+    </div>
+    <div class="boxAdv">
+        <a href="{{url('phan-phoi')}}">
+            <img src="{{url('frontend/imgs/temp/dis.jpg')}}" alt="">
+        </a>
+    </div>
+    <div class="boxVideo">
+        <h3 class="globalTitle">
+            Góc Video
+        </h3>
+        @if ($featureVideos->count() > 0)
+            <div class="listVideo">
+                @if ($firstVideo = $featureVideos->shift())
+                    <div class="videoScreen">
+                        <iframe width="100%" height="200" src="{{$firstVideo->url}}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                @endif
+                @if ($featureVideos->count() > 0)
                     @foreach ($featureVideos as $video)
-                      <li><a href="{{url('video/'.$video->slug)}}">{{$video->title}}</a></li>
+                        <div class="item">
+                            <a href="{{url('video/'.$video->slug)}}" class="thumb">
+                                <img src="{{url('img/cache/105x62', $video->image)}}" alt="">
+                            </a>
+                            <h3>
+                                <a href="{{url('video/'.$video->slug)}}">{{$video->title}}</a>
+                            </h3>
+                            <p class="view">{{$video->views}} lượt xem</p>
+                        </div>
                     @endforeach
-                </ul>
-            @endif
-        </div>
-    @endif
-    @foreach ($rightBanners as $banner)
-        <div class="box-adv">
-            <a href="{{$banner->url}}">
-                <img src="{{url('files/'.$banner->image)}}" alt="Tue linh">
-            </a>
-        </div>
-    @endforeach
-
-    <div class="boxHot cf">
-        <h3 class="global-title"><a href="{{url('tin-tuc')}}">Tin nổi bật</a></h3>
-        @foreach ($rightNews as $post)
-            <div class="item cf">
-                <a href="{{url($post->slug.'.html')}}" class="thumb">
-                    <img src="{{url('img/cache/100x80/'.$post->image)}}" alt="hot" width="100" height="80">
-                </a>
-                <h4>
-                    <a href="{{url($post->slug.'.html')}}">{{$post->title}}</a>
-                </h4>
+                @endif
             </div>
-        @endforeach
+        @endif
     </div>
-    <!-- /endHot -->
-    <div class="Social">
-        <div class="fb-page" data-href="https://www.facebook.com/tuelinh.vn/?ref=br_rs" data-tabs="timeline" data-height="150px" data-small-header="true" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/tuelinh.vn/?ref=br_rs"><a href="https://www.facebook.com/tuelinh.vn/?ref=br_rs">Tuệ Linh</a></blockquote></div></div>
+    <div class="boxSocial">
+        <div class="Social">
+            <div class="fb-page" data-href="https://www.facebook.com/tuelinh.vn" data-width="100%" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/tuelinh.vn"><a href="https://www.facebook.com/tuelinh.vn">Tuệ Linh</a></blockquote></div></div>
+        </div>
     </div>
-</div><!--//col-right-->
+    <div class="boxNews" id="sideBar">
+        <h3 class="globalTitle">
+            Tin nổi bật
+        </h3>
+        <div class="listNews">
+            @foreach ($rightNews as $post)
+                <div class="item clearFix">
+                    <a href="{{url($post->slug.'.html')}}" class="thumb">
+                        <img src="{{url('img/cache/105x62', $post->image)}}" alt="">
+                    </a>
+                    <h3>
+                        <a href="{{url($post->slug.'.html')}}">{{$post->title}}</a>
+                    </h3>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>

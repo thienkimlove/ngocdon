@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en" class="no-js">
 <head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type'/>
-    <link type="image/x-icon" href="{{url('frontend/favicon.ico')}}" rel="shortcut icon"/>
-    <link href="https://plus.google.com/107515763736347546999" rel="publisher"/>
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:700italic,800italic,700,800&amp;subset=latin,vietnamese" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{url('frontend/css/gdgtuelinh.css')}}" type="text/css"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" href="{{url('frontend/css/ngocdon.css')}}" type="text/css"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <meta content='GCL' name='generator'/>
     <title>{{$meta_title}}</title>
 
@@ -38,29 +39,16 @@
     <meta name="COPYRIGHT" content="Copyright 2013 by Goethe"/>
     <meta name="Googlebot" content="index,follow,archive" />
     <meta name="RATING" content="GENERAL"/>
-    <!--[if lte IE 8]>
+    <!--[if lte IE 9]>
     <script src="{{url('frontend/js/html5.js')}}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{{url('frontend/css/ie9.css')}}" type="text/css"/>
     <![endif]-->
-    <!--[if lte IE 7]>
-    <link rel="stylesheet" href="{{url('frontend/css/ie.css')}}" type="text/css"/>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-570f69bb385fe2f2"></script>
+    <script src="{{url('frontend/js/modernizr.js')}}" type="text/javascript"></script>
 </head>
-<body class="home">
-<div class="wrapper" id="wrapper">
-    @include('frontend.header')
-
-    @yield('content')
-
-    @include('frontend.footer')
-    <div class="overlay" id="overlay"></div>
-    @include('frontend.mobile_menu')
-</div>
+<body>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script>
+    (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
@@ -68,8 +56,17 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 </script>
+@include('frontend.header')
+<!-- /endHeader -->
+
+@yield('content')
+
+@include('frontend.footer')
 <script type="text/javascript" src="{{url('frontend/js/jquery-1.10.2.min.js')}}"></script>
+<script type="text/javascript" src="{{url('frontend/js/jquery.matchHeight-min.js')}}"></script>
+<script type="text/javascript" src="{{url('frontend/js/jquery.responsiveTabs.min.js')}}"></script>
 <script type="text/javascript" src="{{url('frontend/js/owl.carousel.min.js')}}"></script>
 <script type="text/javascript" src="{{url('frontend/js/common.js')}}"></script>
+@yield('script')
 </body>
 </html>

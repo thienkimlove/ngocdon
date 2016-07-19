@@ -102,6 +102,34 @@ return array(
         '110x70' => function($image) {
             return $image->fit(110, 70);
         },
+
+        '285x150' => function($image) {
+            return $image->fit(280, 150);
+        },
+
+        '320x225' => function($image) {
+            return $image->fit(320, 225);
+        },
+
+        '340x225' => function($image) {
+            return $image->fit(340, 225);
+        },
+
+        '105x62' => function($image) {
+            return $image->fit(105, 62);
+        },
+
+        '656x270' => function($image) {
+            return $image->fit(656, 270);
+        },
+
+        '275x200' => function($image) {
+            return $image->fit(275, 200);
+        },
+
+        '200x200' => function($image) {
+            return $image->fit(200, 200);
+        },
     ),
 
     /*
