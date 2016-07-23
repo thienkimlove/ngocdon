@@ -67,7 +67,6 @@
   /*end*/
   var slideHomepage = function(){
     $('#slideHomepage').owlCarousel({
-        loop:true,
         margin:0,
         responsiveClass:true,
         autoplay: true,
@@ -86,7 +85,6 @@
             1000:{
                 items:1,
                 nav:true,
-                loop:true,
                 dots: false
             }
         }
