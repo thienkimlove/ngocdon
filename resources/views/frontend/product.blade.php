@@ -13,7 +13,7 @@
                 </ul>
                 <div class="boxDetail">
                     <h2 class="titlePost">{{$product->title}}</h2>
-                   {!! $product->content_tab_1 !!}
+                   {!! $product->content_tab1 !!}
                 </div>
                 <!-- //listButton -->
                 <ul class="listButton clearFix">
