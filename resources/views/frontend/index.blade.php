@@ -51,7 +51,7 @@
                         Câu chuyện thành công
                     </div>
                     <div class="data owl-carousel" id="slideHistory">
-                        @foreach ($secondIndexCategory->indexPosts as $post)
+                        @foreach ($secondIndexCategory->indexPosts() as $post)
                            <div class="item">
                             <div class="block">
                                 <a href="{{url($post->slug.'.html')}}" class="thumbHistory">
