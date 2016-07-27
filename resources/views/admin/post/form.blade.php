@@ -66,6 +66,10 @@
             </div>
 
 
+                <div class="form-group">
+                    {!! Form::label('index_slide', 'Index Feature') !!}
+                    {!! Form::checkbox('index_slide', null, null) !!}
+                </div>
 
 
             <div class="form-group">
