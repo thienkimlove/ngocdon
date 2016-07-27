@@ -48,7 +48,7 @@
             <div class="layoutLeft">
                 <div class="boxHistory">
                     <div class="globalTitle">
-                        {{$secondIndexCategory->name}}
+                        Câu chuyện thành công
                     </div>
                     <div class="data owl-carousel" id="slideHistory">
                         @foreach ($secondIndexCategory->indexPosts() as $post)
