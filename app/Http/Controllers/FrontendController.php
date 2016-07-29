@@ -383,6 +383,8 @@ class FrontendController extends Controller
 
             if (!$featurePost) {
                 $featurePost = $posts->shift();
+            } else {
+                $featurePost = $featurePost->first();
             }
 
 
