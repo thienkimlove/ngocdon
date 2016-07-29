@@ -76,6 +76,7 @@ class PostsController extends AdminController
         $data['image'] =  ($request->file('image') && $request->file('image')->isValid()) ? $this->saveImage($request->file('image')) : '';
         $data['index_slide'] = ($request->input('index_slide') == 'on') ? true : false;
         $data['status'] = ($request->input('status') == 'on') ? true : false;
+        $data['feature'] = ($request->input('feature') == 'on') ? true : false;
         $post = Post::create($data);
         $this->syncTags($request, $post);
         flash('Create post success!', 'success');
@@ -99,6 +100,7 @@ class PostsController extends AdminController
         }
         $data['index_slide'] = ($request->input('index_slide') == 'on') ? true : false;
         $data['status'] = ($request->input('status') == 'on') ? true : false;
+        $data['feature'] = ($request->input('feature') == 'on') ? true : false;
         $post->update($data);
         $this->syncTags($request, $post);
         flash('Update post success!', 'success');

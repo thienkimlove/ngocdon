@@ -9,7 +9,8 @@
             <img src="{{url('frontend/imgs/temp/dis.jpg')}}" alt="">
         </a>
     </div>
-    <div class="boxVideo">
+    @if ($page != 'video')
+       <div class="boxVideo">
         <h3 class="globalTitle">
             Góc Video
         </h3>
@@ -36,12 +37,14 @@
             </div>
         @endif
     </div>
+    @endif
     <div class="boxSocial">
         <div class="Social">
             <div class="fb-page" data-href="https://www.facebook.com/tuelinh.vn" data-width="100%" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/tuelinh.vn"><a href="https://www.facebook.com/tuelinh.vn">Tuệ Linh</a></blockquote></div></div>
         </div>
     </div>
-    <div class="boxNews" id="sideBar">
+    @if (!in_array($page, ['lien-he', 'phan-phoi']))
+        <div class="boxNews" id="sideBar">
         <h3 class="globalTitle">
             Tin nổi bật
         </h3>
@@ -58,4 +61,5 @@
             @endforeach
         </div>
     </div>
+    @endif
 </div>

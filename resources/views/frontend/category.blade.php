@@ -10,24 +10,24 @@
                     </li>
                     <li class="active">{{$category->name}}</li>
                 </ul>
-                @if ($firstPost = $posts->shift())
+                @if ($featurePost)
                     <div class="boxDetail">
                         <div class="topNews">
                             <p>
-                                <img src="{{url('img/cache/656x270', $firstPost->image)}}" alt="">
+                                <img src="{{url('img/cache/656x270', $featurePost->image)}}" alt="">
                             </p>
                             <h2 class="titlePost">
-                               {{$firstPost->title}}
+                               {{$featurePost->title}}
                             </h2>
                             <p>
-                                {{$firstPost->desc}}
+                                {{$featurePost->desc}}
                             </p>
                             <div class="viewDetail clearFix">
                                 <div class="date">
-                                    <span class="datePost">{{$firstPost->updated_at->format('D/m/Y')}}</span>
-                                    <span> {{$firstPost->views}} lượt xem</span>
+                                    <span class="datePost">{{$featurePost->updated_at->format('D/m/Y')}}</span>
+                                    <span> {{$featurePost->views}} lượt xem</span>
                                 </div>
-                                <a href="{{url($firstPost->slug.'.html')}}" class="viewMore">Xem thêm</a>
+                                <a href="{{url($featurePost->slug.'.html')}}" class="viewMore">Xem thêm</a>
                             </div>
                         </div>
                     </div>

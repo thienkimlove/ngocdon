@@ -167,7 +167,7 @@ class FrontendController extends Controller
         $page = 'video';
         $mainVideo = null;
         $meta_title = $meta_desc = $meta_keywords = null;
-        $videos = Video::paginate(6);
+        $videos = Video::paginate(9);
 
         if ($videos->count() > 0) {
             $mainVideo = $videos->first();
@@ -349,26 +349,48 @@ class FrontendController extends Controller
         } else {
             $category = Category::where('slug', $value)->first();
 
+            $featurePost = null;
+
             if ($category->subCategories->count() == 0) {
                 //child categories
                 $posts = Post::publish()
                     ->where('category_id', $category->id)
                     ->latest('updated_at')
-                    ->paginate(10);
+                    ->paginate(5);
+
+                $featurePost = Post::publish()
+                    ->where('category_id', $category->id)
+                    ->latest('updated_at')
+                    ->where('feature', true)
+                    ->limit(1)
+                    ->get();
 
             } else {
                 //parent categories
                 $posts = Post::publish()
                     ->whereIn('category_id', $category->subCategories->lists('id')->all())
                     ->latest('updated_at')
-                    ->paginate(10);
+                    ->paginate(5);
+
+                $featurePost = Post::publish()
+                    ->whereIn('category_id', $category->subCategories->lists('id')->all())
+                    ->latest('updated_at')
+                    ->where('feature', true)
+                    ->limit(1)
+                    ->get();
 
             }
+
+            if (!$featurePost) {
+                $featurePost = $posts->shift();
+            }
+
+
             
             $page = $category->slug;
 
             return view('frontend.category', compact(
-                'category', 'posts', 'page','middleIndexBanner'
+                'category', 'posts', 'page','middleIndexBanner', 'featurePost'
             ))->with($this->generateMeta('category', [
                 'title' => ($category->seo_name) ?  $category->seo_name : $category->name,
                 'desc' =>  ($category->desc)? $category->desc : null,
