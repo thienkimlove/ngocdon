@@ -356,7 +356,7 @@ class FrontendController extends Controller
                 $posts = Post::publish()
                     ->where('category_id', $category->id)
                     ->latest('updated_at')
-                    ->paginate(5);
+                    ->paginate(6);
 
                 $featurePost = Post::publish()
                     ->where('category_id', $category->id)
@@ -370,7 +370,7 @@ class FrontendController extends Controller
                 $posts = Post::publish()
                     ->whereIn('category_id', $category->subCategories->lists('id')->all())
                     ->latest('updated_at')
-                    ->paginate(5);
+                    ->paginate(6);
 
                 $featurePost = Post::publish()
                     ->whereIn('category_id', $category->subCategories->lists('id')->all())
