@@ -1,4 +1,4 @@
-<div class="layoutRight">
+﻿<div class="layoutRight">
     <div class="boxAdv">
         <a href="#">
             <img src="{{url('frontend/imgs/temp/contact.jpg')}}" alt="">
@@ -40,11 +40,11 @@
     @endif
     <div class="boxSocial">
         <div class="Social">
-            <div class="fb-page" data-href="https://www.facebook.com/tuelinh.vn" data-width="100%" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/tuelinh.vn"><a href="https://www.facebook.com/tuelinh.vn">Tuệ Linh</a></blockquote></div></div>
+            <div class="fb-page" data-href="https://www.facebook.com/AlidSlim-Eo-thon-d%C3%A1ng-%C4%91%E1%BA%B9p-1025739557533863/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/AlidSlim-Eo-thon-d%C3%A1ng-%C4%91%E1%BA%B9p-1025739557533863/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/AlidSlim-Eo-thon-d%C3%A1ng-%C4%91%E1%BA%B9p-1025739557533863/">AlidSlim - Eo thon, dáng ð?p</a></blockquote></div>
         </div>
     </div>
     @if (!in_array($page, ['lien-he', 'phan-phoi']))
-        <div class="boxNews" id="sideBar">
+        <div class="boxNews" id="sidebar">
         <h3 class="globalTitle">
             Tin nổi bật
         </h3>
