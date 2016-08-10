@@ -57,11 +57,12 @@
                                 <a href="{{url($post->slug.'.html')}}" class="thumbHistory">
                                     <img src="{{url('img/cache/340x225', $post->image)}}" alt="{{$post->title}}" width="340" height="225">
                                 </a>
-                                <h3>
+								<br />
+                                <h4>
                                     <a href="{{url($post->slug.'.html')}}">
                                         {{$post->title}}
                                     </a>
-                                </h3>
+                                </h4>
                                 <p class="authorPost">
                                     {{$post->author}}
                                 </p>

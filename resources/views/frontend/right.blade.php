@@ -11,9 +11,9 @@
     </div>
     @if ($page != 'video')
        <div class="boxVideo">
-        <h3 class="globalTitle">
+        <h4 class="globalTitle">
             Góc Video
-        </h3>
+        </h4>
         @if ($featureVideos->count() > 0)
             <div class="listVideo">
                 @if ($firstVideo = $featureVideos->shift())
@@ -27,9 +27,9 @@
                             <a href="{{url('video/'.$video->slug)}}" class="thumb">
                                 <img src="{{url('img/cache/105x62', $video->image)}}" alt="">
                             </a>
-                            <h3>
+                            <h4>
                                 <a href="{{url('video/'.$video->slug)}}">{{$video->title}}</a>
-                            </h3>
+                            </h4>
                             <p class="view">{{$video->views}} lượt xem</p>
                         </div>
                     @endforeach
@@ -54,9 +54,9 @@
                     <a href="{{url($post->slug.'.html')}}" class="thumb">
                         <img src="{{url('img/cache/105x62', $post->image)}}" alt="">
                     </a>
-                    <h3>
+                    <h4>
                         <a href="{{url($post->slug.'.html')}}">{{$post->title}}</a>
-                    </h3>
+                    </h4>
                 </div>
             @endforeach
         </div>

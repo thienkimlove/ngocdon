@@ -1,21 +1,22 @@
 <header class="header">
     <div class="container">
-        <div class="panelTop">
-            {!! Form::open(array('url' => 'search', 'method' => 'get')) !!}
-                <div class="boxSearch">
-                    <input type="text" name="q" placeholder="Nội dung tìm kiếm">
-                </div>
-            {!! Form::close() !!}
-
-            <ul class="navSocial pc">
-                <li>
-                    <a href="#" class="fb">Facebook</a>
-                </li>
-                <li><a href="#" class="yu">Youtube</a></li>
-            </ul>
-        </div>
-        <a href="#" title="Menu" class="sp btnMenu" id="btnMenu">Menu</a>
-    </div>
+<div class="panelTop">
+<form method="GET" action="http://www.duongngocdon.vn/search" accept-charset="UTF-8">
+<div class="boxSearch">
+<input type="text" name="q" placeholder="Nội dung tìm kiếm"/>
+</div>
+</form>
+<ul class="navSocial pc">
+<li>
+<a href="#" class="fb">Facebook</a>
+</li>
+<li>
+<a href="#" class="yu">Youtube</a>
+</li>
+</ul>
+</div>
+<a href="#" title="Menu" class="sp btnMenu" id="btnMenu">Menu</a>
+</div>
     <div class="headerNav">
         <div class="navGlobal">
             <div class="container">
