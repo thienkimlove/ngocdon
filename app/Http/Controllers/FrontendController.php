@@ -125,9 +125,8 @@ class FrontendController extends Controller
     {
         $page = 'index';
 
-        $featurePosts  =  Post::publish()
-            ->where('index_slide', true)
-            ->latest('updated_at')
+        $featurePosts  =  Banner::where('position', 'feature_index')
+            ->where('status', true)
             ->limit(3)
             ->get();
 
@@ -146,14 +145,19 @@ class FrontendController extends Controller
 
         $secondIndexCategory = Category::where('index_display', 2)->get();
 
+        $cauchuyenPosts = null;
+
         if ($secondIndexCategory->count() > 0) {
             $secondIndexCategory = $secondIndexCategory->first();
+
+            $cauchuyenPosts = Post::where('category_id', $secondIndexCategory->id)->where('status', true)->orderBy('updated_at', 'desc')->limit(8)->get();
+
         }  else {
             $secondIndexCategory = null;
         }
 
         
-        return view('frontend.index', compact('featurePosts', 'topIndexCategory', 'secondIndexCategory', 'page'))->with($this->generateMeta());
+        return view('frontend.index', compact('featurePosts', 'topIndexCategory', 'secondIndexCategory', 'page', 'cauchuyenPosts'))->with($this->generateMeta());
     }
 
     public function contact()

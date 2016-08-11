@@ -3,10 +3,10 @@
 @section('content')
     <section class="boxFeature">
         <div class="container">
-            @foreach ($featurePosts as $post)
-                <article class="item{{ $post->class  }}">
-                    <a href="{{url($post->slug.'.html')}}" class="thumb" title="{{$post->title}}">
-                        <img src="{{url('img/cache/285x150', $post->image)}}" alt="{{$post->title}}" width="285" height="150">
+            @foreach ($featurePosts as $banner)
+                <article class="item{{$banner->class}}">
+                    <a href="{{$banner->url}}" class="thumb">
+                        <img src="{{url('files/'.$banner->image)}}" width="285" height="150">
                     </a>
                 </article>
             @endforeach
@@ -51,7 +51,7 @@
                         Câu chuyện thành công
                     </div>
                     <div class="data owl-carousel" id="slideHistory">
-                        @foreach ($secondIndexCategory->indexPosts() as $post)
+                        @foreach ($cauchuyenPosts as $post)
                            <div class="item">
                             <div class="block">
                                 <a href="{{url($post->slug.'.html')}}" class="thumbHistory">
