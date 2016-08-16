@@ -281,7 +281,6 @@ section, header, footer {
 #sidebar.fixed {
   position: fixed;
   width : 300px;
-  top: 100px;
 }
 .navGlobal {
   list-style-type: none;
