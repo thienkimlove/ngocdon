@@ -1,18 +1,6 @@
 $(document).ready(function() {
-    // check where the shoppingcart-div is
-    var offset = $('#sidebar').offset();
-
-    if (typeof offset != undefined) {
-        $(window).scroll(function () {
-            var scrollTop = $(window).scrollTop();
-            // check the visible top of the browser
-            if (offset.top<scrollTop) {
-                $('#sidebar').addClass('fixed');
-                $('#sidebar').offset.top = offset.top;
-            } else {
-                $('#sidebar').removeClass('fixed');
-            }
-        });
-    }
-
+    $('#sidebar').scrollToFixed({
+        marginTop: 100,
+        postFixed: function() { $(this).css('width', '300px'); },
+    });
 });

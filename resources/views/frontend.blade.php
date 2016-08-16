@@ -66,8 +66,10 @@
 <script type="text/javascript" src="{{url('frontend/js/jquery.matchHeight-min.js')}}"></script>
 <script type="text/javascript" src="{{url('frontend/js/jquery.responsiveTabs.min.js')}}"></script>
 <script type="text/javascript" src="{{url('frontend/js/owl.carousel.min.js')}}"></script>
+<script type="text/javascript" src="{{url('frontend/js/ScrollToFixed/jquery-scrolltofixed-min.js')}}"></script>
 <script type="text/javascript" src="{{url('frontend/js/fixedsidebar.js')}}"></script>
 <script type="text/javascript" src="{{url('frontend/js/common.js')}}"></script>
+
 @yield('script')
 </body>
 </html>
