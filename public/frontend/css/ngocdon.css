@@ -1,8 +1,4 @@
-@font-face {
-  font-family: 'Open Sans';
-  src: url("../fonts/open-sans.eot"), url("../fonts/open-sans.ttf") format("truetype"), url("../fonts/open-sans.woff") format("woff");
-  font-weight: 400;
-}
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
 /* Reset */
 /* fonts */
 html, body, div, span, object, iframe,
@@ -31,6 +27,7 @@ b {
 
 strong {
   line-height: 200%;
+  font-weight: bold;
 }
 
 html {
@@ -721,7 +718,7 @@ section, header, footer {
 .layoutHome {
   margin-bottom: 20px;
 }
-
+.layoutHome .news-home {display: none;}
 .layoutLeft {
   float: left;
   width: 68%;
@@ -772,13 +769,29 @@ section, header, footer {
 .boxDetail .news-type.bgList li a {
   height: 26px;
   color: #fff;
-  text-transform: uppercase;;
+  text-transform: uppercase;
+  display: block;
+  padding: 10px;
 }
 .boxDetail .news-type.bgList li.active a {
   background: #d71a21;
   color: #fff;
-  display: block;
-  padding: 10px;
+}
+
+.boxDetail table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #eee;
+  font-size: 14px;
+}
+.boxDetail td, .boxDetail th {
+  padding: 6px;
+  border: 1px solid #ccc;
+  text-align: left;
+  vertical-align: top;
+}
+.boxDetai tr:nth-of-type(odd) {
+  background: #eee;
 }
 /* //end */
 
@@ -1775,6 +1788,15 @@ section, header, footer {
   }
 }
 @media only screen and (max-width: 640px) {
+body {
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  line-height: 1.42;
+  color: #444444;
+  height: 100%;
+  -webkit-text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+}
   .header {
     height: auto;
     border: none;
@@ -1788,7 +1810,9 @@ section, header, footer {
   .boxPromo, .panelTop {
     display: none;
   }
-
+  .boxDetail .news-type.bgList li  {
+    display: block;
+  }
   .layoutLeft {
     width: 100%;
     margin-right: 0;

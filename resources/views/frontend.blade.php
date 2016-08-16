@@ -6,8 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <link rel="stylesheet" href="{{url('frontend/css/ngocdon.css')}}" type="text/css"/>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <meta content='GCL' name='generator'/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <title>{{$meta_title}}</title>
 
     <meta property="og:title" content="{{$meta_title}}">
