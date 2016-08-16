@@ -8,6 +8,7 @@ $(document).ready(function() {
             // check the visible top of the browser
             if (offset.top<scrollTop) {
                 $('#sidebar').addClass('fixed');
+                $('#sidebar').offset.top = offset.top;
             } else {
                 $('#sidebar').removeClass('fixed');
             }
