@@ -6,7 +6,7 @@
             @foreach ($featurePosts as $banner)
                 <article class="item{{$banner->class}}">
                     <a href="{{$banner->url}}" class="thumb">
-                        <img src="{{url('files/'.$banner->image)}}" width="285" height="150">
+                        <img src="{{url('files/'.$banner->image)}}" width="285" height="153">
                     </a>
                 </article>
             @endforeach
