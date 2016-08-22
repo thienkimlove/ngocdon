@@ -8,6 +8,7 @@ use App\Post;
 use App\Product;
 use App\Video;
 use Illuminate\Support\ServiceProvider;
+use Jenssegers\Agent\Agent;
 
 class ViewComposerProvider extends ServiceProvider
 {
@@ -58,8 +59,17 @@ class ViewComposerProvider extends ServiceProvider
 
         view()->composer('frontend.right', function ($view) {
 
+            $agent = new Agent();
+
+
+            if (!$agent->isMobile() && !$agent->isTablet()) {
+                $rightNews =  Post::publish()->latest('updated_at')->limit(4)->get();
+            } else {
+                $rightNews = null;
+            }
+
             $view->with('featureVideos',  Video::latest('updated_at')->limit(4)->get());
-            $view->with('rightNews',  Post::publish()->latest('updated_at')->limit(4)->get());
+            $view->with('rightNews',  $rightNews);
             $view->with('rightBanners',  Banner::where('status', true)->where('position', 'right')->get());
         });
     }
