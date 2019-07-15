@@ -14,10 +14,10 @@
                     <div class="boxDetail">
                         <div class="topNews">
                             <p>
-                                <img src="{{url('img/cache/656x270', $featurePost->image)}}" alt="">
+                                <a href="{{url($featurePost->slug.'.html')}}"><img src="{{url('img/cache/656x270', $featurePost->image)}}" alt=""></a>
                             </p>
                             <h2 class="titlePost">
-                               {{$featurePost->title}}
+                              <a href="{{url($featurePost->slug.'.html')}}"> {{$featurePost->title}}</a>
                             </h2>
                             <p>
                                 {{$featurePost->desc}}

@@ -21,8 +21,8 @@
                 </div>
                 <!-- //listButton -->
                 <ul class="listButton clearFix">
-                    <li class="ilocal"><a href="{{url('phan-phoi')}}">Xem điểm bán Ngọc Đơn Slim</a></li>
-                    <li class="icall"><a href="{{url('lien-he')}}">1900 6482 - 0912 571 190</a></li>
+                    <li class="ilocal"><a href="{{url('phan-phoi')}}">Xem điểm bán Dưỡng Ngọc Đơn</a></li>
+                    <li class="icall"><a href="{{url('lien-he')}}">19006482 - 0912571190</a></li>
                 </ul>
                 @foreach ($middleIndexBanner as $banner)
                     <div class="boxAdv">

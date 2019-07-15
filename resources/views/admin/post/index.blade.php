@@ -54,6 +54,9 @@
                                         <button id-attr="{{$post->id}}" class="btn btn-primary btn-sm edit-post" type="button">Edit</button>&nbsp;
                                         {!! Form::open(['method' => 'DELETE', 'route' => ['admin.posts.destroy', $post->id]]) !!}
                                         <button type="submit" class="btn btn-danger btn-mini">Delete</button>
+										<button class="btn btn-primary btn-sm" type="button">
+                                        <a target="_blank" href="{{url($post->slug.'.html')}}" style="color:#FFFFFF">View Post</a>
+                                        </button>
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>
